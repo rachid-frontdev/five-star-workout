@@ -1,19 +1,47 @@
-const express = require('express');
 const request = require('request');
-const cors = require('cors');
+const express = require('express');
 const app = express();
-const workoutRoutes = require('./routes/workout-routes.js');
+const cors = require('cors');
 require('dotenv/config');
-const baseUrl = `http://api.scraperapi.com?api_key=${process.env.API_KEY}&autoparse=true`;
+const apiRoutes = require('./routes/apiRoutes.js');
+const speedLimiter = require("./slowdown.js");
+const rateLimit = require('./rateLimit.js');
+const  workoutRoutes = require('./routes/workout-routes.js');
 // custom module
+app.enable("trust proxy");
+app.set('views', 'views');
+app.set('view engine', 'ejs')
+
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.set('trust proxy', 1);
+/*
+(req,res,next) => {
+// const apiKeys = new Map();
+// apiKeys.set('12345',true);
+  const api_key = req.get('X-API-KEY');
+  if(apiKeys.has(api_key)) {
+    return next();
+  } else {
+    const error = new Error('invalid API KEY');
+    next(error);
+  }
+},*/
+  const params  = new URLSearchParams({
+    api_key:process.env.API_KEY,
+    autoparse:true,
+    url:`https://www.amazon.com/dp/`
+  });
+
+
+
+// app.use('/api',apiRoutes)
+app.use(workoutRoutes);
+
 app.listen('4000', () => {
   console.log("connected to API");
 })
-app.use(workoutRoutes);
-
 
 // app.get('/products/:productId',async(req,res) => {
 // try {

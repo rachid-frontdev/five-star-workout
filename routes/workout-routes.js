@@ -1,18 +1,27 @@
 const router = require('express').Router();
 const workoutGetModel = require('../models/getWorkout.js');
 const workoutModel = require('../models/addworkout.js');
-const path = require('path');
+const speedLimiter = require('../slowdown.js');
+const rateLimit = require('../rateLimit.js');
 
-router.get('/', (req,res) => {
-  res.sendFile(path.join(__dirname, 'index.html'))
-
+let cacheTime;
+let cachedData;
+router.get('/',speedLimiter,(req,res) => {
+  res.render('index')
 });
-router.get('/exercises', (req,res) => {
+router.get('/exercises', rateLimit,speedLimiter,(req,res) => {
+  if(cacheTime && cacheTime > Date.now() - 30 * 1000) {
+    return res.json(cachedData);
+  }
   workoutGetModel.getWorkout().then(data => {
+    cachedData = data;
+    cacheTime = Date.now();
+    data.cacheTime = cacheTime;
+    //respond to this request with data from amazon scarper api
     console.log(data);
-    res.json(data)
+    return res.json(data)
   }).catch(err => {
-    console.log(err);
+    return console.log(err);
   });
 });
 router.post('/', (req,res) => {

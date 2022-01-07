@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const DB_Url = 'mongodb+srv://rachid2000r:01012000r_R@cluster0.qyl4y.mongodb.net/workoutDb?retryWrites=true&w=majority';
+const DB_Url = process.env.DB_CONNECTION;
 const opts = {
 useNewUrlParser: true,
 useUnifiedTopology: true

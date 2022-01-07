@@ -1,0 +1,73 @@
+<%- include('parts/layout') %>
+<form id="regForm" method="POST">
+<legend>email:</legend>
+<input id="email" type="text" name="email">
+<input type="submit" id="btnReg" value="register">
+</form>
+<form  id="getForm" method="GET">
+  <input type="submit" id="btnAll"  value="get All Cheeses">
+<pre class="response"></pre>
+</form>
+<form  id="addForm" method="POST">
+  <legend>add cheese :</legend>
+  <input id="cheese" type="text" name="cheese" >
+  <input type="submit" id="btnAdd" value="Add Cheeses">
+<pre class="response"></pre>
+</form>
+<!-- <script type="text/javascript">
+  document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById("btnReg").addEventListener('click',regf);
+    document.getElementById("btnAll").addEventListener('click',getAll);
+    document.getElementById("btnAdd").addEventListener('click',doAdd);
+
+  })
+let currentForm = null;
+function regf(ev) {
+  ev.preventDefault();
+   currentForm = 'regForm';
+   const email = document.getElementById('email')
+   let data = JSON.stringify({email});
+   return send('/api/register', data, 'POST');
+}
+
+function getAll(ev) {
+  ev.preventDefault();
+   currentForm = 'getForm';
+   return send('/api/cheese', null, 'GET');
+}
+  function doAdd(ev) {
+    ev.preventDefault();
+     currentForm = 'addForm';
+     let cheese = document.getElementById('cheese').value;
+     let data = JSON.stringify({cheese});
+     return send('/api/cheese', data, 'POST');
+  }
+  function send(endpoint,data,method) {
+    let key = sessionStorage.getItem('mySiteApiKey');
+    let url = `http://localhost:4000/${endpoint}?apiKey=${key}`
+    let h = new Headers();
+    if(data) h.append("Content-Type", "application/json");
+    let req = new Request(url, {
+      method,
+      headers:h,
+      body:data
+    });
+fetch(req).then((res) => res.json()).then(success).catch(fail);
+function fail(err) {
+  console.log(err.message);
+  let pre = document.querySelector(`#${currentForm} .response`);
+  pre.textContent = err.message;
+}
+function success(content) {
+  if('error' in content) fail(content.error);
+  let data = content.data;
+  let pre = document.querySelector(`#${currentForm} .response`);
+  pre.textContent = JSON.stringify(data, '\n', 2);
+  if(currentForm == "regForm") {
+    console.log('saving api key in sessionStorage');
+    sessionStorage.setItem("mySiteApiKey", data.api_key)
+  }
+}
+  }
+</script>-->
+<%- include('parts/footer') %>
