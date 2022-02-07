@@ -18,7 +18,6 @@ router.get('/exercises', rateLimit,speedLimiter,(req,res) => {
     cacheTime = Date.now();
     data.cacheTime = cacheTime;
     //respond to this request with data from amazon scarper api
-    console.log(data);
     return res.json(data)
   }).catch(err => {
     return console.log(err);
