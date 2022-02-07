@@ -66,3 +66,33 @@ Please use %20 in place of whitespace/spacing between words in a query string
 Ex. /exercises/bodyPart/upper%20legs
 -------------------------------
 https://rapidapi.com/justin-WFnsXH_t6/api/exercisedb/details
+-------------------------------
+
+// app.get('/products/:productId',async(req,res) => {
+// try {
+//   const {productId} = req.params;
+//   const response = await request(`${baseUrl}&url=https://www.amazon.com/dp/${productId}`);
+//     console.log(response);
+//   res.json(response)
+// } catch (e) {
+//   res.json(e)
+// }
+// })
+// app.get('/products/:productId/reviews',async(req,res) => {
+// try {
+//   const {productId} = req.params;
+//   const response = await request(`${baseUrl}&url=https://www.amazon.com/product-reviews/${productId}`)
+//   res.json(JSON.parse(response))
+// } catch (e) {
+//   res.json(e)
+// }
+// })
+// app.get('/products/:productId/offers',async(req,res) => {
+// try {
+//   const {productId} = req.params;
+//   const response = await request(`${baseUrl}&url=https://www.amazon.com/offer-listing/${productId}`)
+//   res.json(JSON.parse(response))
+// } catch (e) {
+//   res.json(e)
+// }
+// })
