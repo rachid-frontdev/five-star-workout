@@ -2,7 +2,7 @@ const router = require('express').Router();
 const workoutGetModel = require('../models/getWorkout.js');
 const workoutModel = require('../models/addworkout.js');
 const speedLimiter = require('../slowdown.js');
-const rateLimit = require('../rateLimit.js');
+const rateLimit = require('../ratelimit.js');
 
 let cacheTime;
 let cachedData;
