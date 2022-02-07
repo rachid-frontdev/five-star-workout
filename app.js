@@ -5,7 +5,7 @@ const cors = require('cors');
 require('dotenv/config');
 const apiRoutes = require('./routes/apiRoutes.js');
 const speedLimiter = require("./slowdown.js");
-const rateLimit = require('./rateLimit.js');
+const rateLimit = require('./ratelimit.js');
 const  workoutRoutes = require('./routes/workout-routes.js');
 // custom module
 app.enable("trust proxy");
