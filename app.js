@@ -38,8 +38,8 @@ app.set('trust proxy', 1);
 
 // app.use('/api',apiRoutes)
 app.use(workoutRoutes);
-
-app.listen('4000', () => {
+const port = process.env.PORT || 4000;
+app.listen(port, () => {
   console.log("connected to API");
 })
 
